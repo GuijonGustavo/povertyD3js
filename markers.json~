@@ -1,14 +1,14 @@
 [
   {
-    "pobreza": 7,
-    "type": "Client",
-    "version": "2.0"
+    "numero": 5,
+    "type": "pob",
+    "version": "3.0"
   },
   {
 
-    "pobreza": 7,
-    "type": "Server",
-    "version": "4.0"
+    "numero": 7,
+    "type": "ie",
+    "version": "1.0"
   }
   ]
 

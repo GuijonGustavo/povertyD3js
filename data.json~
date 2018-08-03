@@ -1,6 +1,6 @@
 [
   {
-    "pobreza": 1,
+    "numMunicipios": 1,
     "pct05": 0,
     "pct25": 1,
     "pct50": 1,
@@ -8,7 +8,7 @@
     "pct95": 0.44
   },
   {
-    "pobreza": 2,
+    "numMunicipios": 2,
     "pct05": 0,
     "pct25": 0.98,
     "pct50": 0.98,
@@ -16,7 +16,7 @@
     "pct95": 0.61 
   },
   {
-    "pobreza": 3,
+    "numMunicipios": 3,
     "pct05": 0,
     "pct25": 0.83,
     "pct50": 0.83,
@@ -24,7 +24,7 @@
     "pct95": 0.61
   },
   {
-    "pobreza": 4,
+    "numMunicipios": 4,
     "pct05": 0,
     "pct25": 0.95,
     "pct50": 0.95,
@@ -32,7 +32,7 @@
     "pct95": 0.74
   },
   {
-    "pobreza": 5,
+    "numMunicipios": 5,
     "pct05": 0,
     "pct25": 0.84,
     "pct50": 0.84,
@@ -40,7 +40,7 @@
     "pct95": 0.74
   },
   {
-    "pobreza": 6,
+    "numMunicipios": 6,
     "pct05": 0,
     "pct25": 0.92,
     "pct50": 0.92,
@@ -48,7 +48,7 @@
     "pct95": 0.79
   },
   {
-    "pobreza": 7,
+    "numMunicipios": 7,
     "pct05": 0,
     "pct25": 0.90,
     "pct50": 0.90,
@@ -56,7 +56,7 @@
     "pct95": 0.95
   },
   {
-    "pobreza": 8,
+    "numMunicipios": 8,
     "pct05": 0,
     "pct25": 0.52,
     "pct50": 0.52,
@@ -64,7 +64,7 @@
     "pct95": 0.96
   },
   {
-    "pobreza": 9,
+    "numMunicipios": 9,
     "pct05": 0,
     "pct25": 0.80,
     "pct50": 0.80,
@@ -73,7 +73,7 @@
   },
 
   {
-    "pobreza": 10,
+    "numMunicipios": 10,
     "pct05": 0,
     "pct25": 0.99,
     "pct50": 0.99,
@@ -81,7 +81,7 @@
     "pct95": 0.96
   },
   {
-    "pobreza": 11,
+    "numMunicipios": 11,
     "pct05": 0,
     "pct25": 0.70,
     "pct50": 0.70,
