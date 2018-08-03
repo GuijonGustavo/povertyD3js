@@ -34,7 +34,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
     .call(xAxis)
     .append('text')
       .attr('transform', 'rotate(0)')
-      .attr('x', 856)
+      .attr('x', 756)
       .attr('dx', '.71em')
       .text('Número de municipios');
 
@@ -42,53 +42,13 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
     .attr('class', 'y axis')
     .call(yAxis)
     .append('text')
-      .attr('transform', 'rotate(-90)')
+      .attr('transform', 'rotate(0)')
       .attr('y', 6)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text('IE');
 
-  var legend = svg.append('g')
-    .attr('class', 'legend')
-    .attr('transform', 'translate(' + (chartWidth - legendWidth) + ', 20)'); //Para mover la caja en el eje Y
-
-  legend.append('rect')
-    .attr('class', 'legend-bg')
-    .attr('width',  legendWidth)
-    .attr('height', legendHeight);
-
-  legend.append('rect')
-    .attr('class', 'outer')
-    .attr('width',  75)
-    .attr('height', 20)
-    .attr('x', 10)
-    .attr('y', 10);
-
-  legend.append('text')
-    .attr('x', 115)
-    .attr('y', 25)
-    .text('Diferencia');
-
-  legend.append('rect')
-    .attr('class', 'inner')
-    .attr('width',  75)
-    .attr('height', 20)
-    .attr('x', 10)
-    .attr('y', 40);
-
-  legend.append('text')
-    .attr('x', 115)
-    .attr('y', 55)
-    .text('IE');
-
-  legend.append('path')
-    .attr('class', 'median-line')
-    .attr('d', 'M10,80L85,80');
-
-  legend.append('text')
-    .attr('x', 115)
-    .attr('y', 85)
-    .text('Mediana');
+ 
 }
 
 function drawPaths (svg, data, x, y) {
@@ -164,13 +124,6 @@ function addMarker (marker, svg, chartHeight, x) {
     .duration(1000) //Duración en aparecer los globitos
     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
     .attr('opacity', 1);
-
-  markerG.append('path')
-    .attr('d', 'M' + radius + ',' + (chartHeight-yPosStart) + 'L' + radius + ',' + (chartHeight-yPosStart))
-    .transition()
-      .duration(1000)
-      .attr('d', 'M' + radius + ',' + (chartHeight-yPosEnd) + 'L' + radius + ',' + (radius*2));
-
   markerG.append('circle')
     .attr('class', 'marker-bg')
     .attr('cx', radius)
