@@ -1,0 +1,14 @@
+[
+  {
+    "pobreza": 0.3,
+    "type": "Client",
+    "version": "2.0"
+  },
+  {
+
+    "pobreza": 0.7,
+    "type": "Server",
+    "version": "4.0"
+  }
+  ]
+
