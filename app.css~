@@ -40,11 +40,11 @@ svg {
 .legend .median-line {
   fill: none;
   stroke: #000;
-  stroke-width: 1;
+  stroke-width: 0;
 }
 
 .legend .legend-bg {
-  fill: rgba(0, 0, 0, 0.5);
+  fill: rgba(0, 0, 255, 0.3);
   stroke: rgba(0, 0, 0, 0.5);
 }
 

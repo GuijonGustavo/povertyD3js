@@ -1,7 +1,7 @@
 function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   var legendWidth  = 200,
-      legendHeight = 100;
-
+      legendHeight = 80;
+/*
   // clipping to make sure nothing appears behind legend
   svg.append('clipPath')
     .attr('id', 'axes-clip')
@@ -12,7 +12,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
                       (chartWidth + margin.right)    + ',' + legendHeight                  + ' ' +
                       (chartWidth + margin.right)    + ',' + (chartHeight + margin.bottom) + ' ' +
                       (-margin.left)                 + ',' + (chartHeight + margin.bottom));
-
+*/
 //Titulo del gráfico
   svg.append('g')
 		.append("text")         // append text
@@ -48,10 +48,49 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .style('text-anchor', 'end')
       .text('IE');
 
- 
+//Caja descriptiva
+ var legend = svg.append('g')
+    .attr('class', 'legend')
+    .attr('transform', 'translate(' + (chartWidth - legendWidth) + ', 310)');
+
+  legend.append('rect')
+    .attr('class', 'legend-bg')
+    .attr('width',  legendWidth)
+    .attr('height', legendHeight);
+//Zona pobreza
+  legend.append('rect')
+    .attr('class', 'outer')
+    .attr('width',  75)
+    .attr('height', 1)
+    .attr('x', 10)
+    .attr('y', 19);
+
+  legend.append('text')
+    .attr('x', 115)
+    .attr('y', 25)
+    .text('Pobreza');
+//Zona IE
+  legend.append('rect')
+    .attr('class', 'inner')
+    .attr('width',  75)
+    .attr('height', 1)
+    .attr('x', 10)
+    .attr('y', 49);
+
+  legend.append('text')
+    .attr('x', 115)
+    .attr('y', 55)
+    .text('IE');
+/*
+  legend.append('path')
+    .attr('class', 'median-line')
+    .attr('d', 'M10,80L85,80');
+
+  legend.append('text')
+    .attr('x', 115)
+    .attr('y', 85)
+    .text('Median');*/
 }
-
-
 
 function drawPaths (svg, data, x, y) {
   var upperOuterArea = d3.svg.area()
@@ -105,7 +144,7 @@ function drawPaths (svg, data, x, y) {
     .attr('d', medianLine)
     .attr('clip-path', 'url(#rect-clip)');
 }
-
+// Funcion de globitos
 function addMarker (marker, svg, chartHeight, x) {
   var radius = 12,
       xPos = x(marker.date) - radius - 3,
