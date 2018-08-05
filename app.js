@@ -131,14 +131,13 @@ function drawPaths (svg, data, x, y) {
     .attr('clip-path', 'url(#rect-clip)');
 }
 // Funcion de globitos
-function addMarker (marker, svg, chartHeight, x) {
+function addMarker (marker, svg, chartHeight, x, data) {
   var radius = 12,
       xPos = x(marker.numero) - radius - 3,
       yPosStart = chartHeight - radius - 3,
-      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
-//yPosEnd = y(data.pct50);
-		
-//console.log(y);
+//      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
+yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
+console.log(yPosEnd);
 //	alert(chartHeight);
   var markerG = svg.append('g')
     .attr('class', 'marker '+marker.type.toLowerCase())
@@ -166,7 +165,7 @@ function addMarker (marker, svg, chartHeight, x) {
     .attr('y', radius*1.5)
     .text(marker.version);
 }
-function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x) {
+function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x, data) {
   rectClip.transition()
     .duration(1000*markers.length)
     .attr('width', chartWidth);
@@ -174,10 +173,7 @@ function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x) {
 //console.log(data.pct50);
   markers.forEach(function (marker, i) {
     setTimeout(function () {
-      addMarker(marker, svg, chartHeight, x);
-//console.log(d.numMunicipios);
-//console.log(marker.type);
-//console.log(d.pct50);
+      addMarker(marker, svg, chartHeight, x, data);
     }, 1000 + 500*i);
 	  
   });
@@ -213,7 +209,9 @@ function makeChart (data, markers) {
 
   addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
   drawPaths(svg, data, x, y);
-  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x, y, data);
+  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x, data);
+//	console.log(d3.max(markers, function (marker) { return marker.type; }));
+//	console.log(d3.max(data, function (d) { return d.pct95; }));
 }
 
 d3.json('data.json', function (error, rawData) {
