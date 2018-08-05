@@ -1,18 +1,6 @@
 function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   var legendWidth  = 200,
       legendHeight = 80;
-/*
-  // clipping to make sure nothing appears behind legend
-  svg.append('clipPath')
-    .attr('id', 'axes-clip')
-    .append('polygon')
-      .attr('points', (-margin.left)                 + ',' + (-margin.top)                 + ' ' +
-                      (chartWidth - legendWidth - 1) + ',' + (-margin.top)                 + ' ' +
-                      (chartWidth - legendWidth - 1) + ',' + legendHeight                  + ' ' +
-                      (chartWidth + margin.right)    + ',' + legendHeight                  + ' ' +
-                      (chartWidth + margin.right)    + ',' + (chartHeight + margin.bottom) + ' ' +
-                      (-margin.left)                 + ',' + (chartHeight + margin.bottom));
-*/
 //Titulo del gráfico
   svg.append('g')
 		.append("text")         // append text
@@ -103,7 +91,6 @@ function drawPaths (svg, data, x, y) {
     .x (function (d) { return x(d.numMunicipios) || 1; })
     .y0(function (d) { return y(d.pct75); })
     .y1(function (d) { return y(d.pct50); });
-
   var medianLine = d3.svg.line()
     .interpolate('basis')
     .x(function (d) { return x(d.numMunicipios); })
@@ -115,7 +102,6 @@ function drawPaths (svg, data, x, y) {
     .x (function (d) { return x(d.numMunicipios) || 1; })
     .y0(function (d) { return y(d.pct50); })
     .y1(function (d) { return y(d.pct25); });
-
   var lowerOuterArea = d3.svg.area()
     .interpolate('basis')
     .x (function (d) { return x(d.numMunicipios) || 1; })
@@ -147,15 +133,19 @@ function drawPaths (svg, data, x, y) {
 // Funcion de globitos
 function addMarker (marker, svg, chartHeight, x) {
   var radius = 12,
-      xPos = x(marker.date) - radius - 3,
+      xPos = x(marker.numero) - radius - 3,
       yPosStart = chartHeight - radius - 3,
-      yPosEnd = (marker.type === 'ie' ? 80 : 160) + radius - 3;
- 
+      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
+//yPosEnd = y(data.pct50);
+		
+//console.log(y);
+//	alert(chartHeight);
   var markerG = svg.append('g')
     .attr('class', 'marker '+marker.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
+//console.log(d.pct50);
   markerG.transition()
     .duration(1000) //Duración en aparecer los globitos
     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
@@ -176,16 +166,20 @@ function addMarker (marker, svg, chartHeight, x) {
     .attr('y', radius*1.5)
     .text(marker.version);
 }
-
 function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x) {
   rectClip.transition()
     .duration(1000*markers.length)
     .attr('width', chartWidth);
 
+//console.log(data.pct50);
   markers.forEach(function (marker, i) {
     setTimeout(function () {
       addMarker(marker, svg, chartHeight, x);
+//console.log(d.numMunicipios);
+//console.log(marker.type);
+//console.log(d.pct50);
     }, 1000 + 500*i);
+	  
   });
 }
 
@@ -200,12 +194,10 @@ function makeChart (data, markers) {
             .domain(d3.extent(data, function (d) { return d.numMunicipios; })),
       y = d3.scale.linear().range([chartHeight, 0])
             .domain([0, d3.max(data, function (d) { return d.pct95; })]);
-
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
       yAxis = d3.svg.axis().scale(y).orient('left')
                 .innerTickSize(-chartWidth).outerTickSize(0).tickPadding(10);
-
   var svg = d3.select('body').append('svg')
     .attr('width',  svgWidth)
     .attr('height', svgHeight)
@@ -221,7 +213,7 @@ function makeChart (data, markers) {
 
   addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
   drawPaths(svg, data, x, y);
-  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x);
+  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x, y, data);
 }
 
 d3.json('data.json', function (error, rawData) {
@@ -232,7 +224,7 @@ d3.json('data.json', function (error, rawData) {
 
   var data = rawData.map(function (d) {
     return {
-      numMunicipios:  d.numMunicipios,
+      numMunicipios: d.numMunicipios,
       pct05: d.pct05,
       pct25: d.pct25,
       pct50: d.pct50,
@@ -248,12 +240,12 @@ d3.json('data.json', function (error, rawData) {
 
     var markers = markerData.map(function (marker) {
       return {
-        date: marker.numero,
+        numero: marker.numero,
         type: marker.type,
         version: marker.version
       };
     });
-
     makeChart(data, markers);
   });
 });
+
