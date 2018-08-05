@@ -82,28 +82,28 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
 
 function drawPaths (svg, data, x, y) {
   var upperOuterArea = d3.svg.area()
-    .interpolate('basis')
+    .interpolate('cardinal')
     .x (function (d) { return x(d.numMunicipios) || 1; })
     .y0(function (d) { return y(d.pct95); })  //Grueso del área mayor
     .y1(function (d) { return y(d.pct25); });
   var upperInnerArea = d3.svg.area()
-    .interpolate('basis')
+    .interpolate('cardinal')
     .x (function (d) { return x(d.numMunicipios) || 1; })
     .y0(function (d) { return y(d.pct75); })
     .y1(function (d) { return y(d.pct50); });
   var medianLine = d3.svg.line()
-    .interpolate('basis')
+    .interpolate('cardinal')
     .x(function (d) { return x(d.numMunicipios); })
     .y(function (d) { return y(d.pct50); });
 
 
   var lowerInnerArea = d3.svg.area()
-    .interpolate('basis')
+    .interpolate('cardinal')
     .x (function (d) { return x(d.numMunicipios) || 1; })
     .y0(function (d) { return y(d.pct50); })
     .y1(function (d) { return y(d.pct25); });
   var lowerOuterArea = d3.svg.area()
-    .interpolate('basis')
+    .interpolate('cardinal')
     .x (function (d) { return x(d.numMunicipios) || 1; })
     .y0(function (d) { return y(d.pct25); })
     .y1(function (d) { return y(d.pct05); });
@@ -131,15 +131,15 @@ function drawPaths (svg, data, x, y) {
     .attr('clip-path', 'url(#rect-clip)');
 }
 // Funcion de globitos
-function addMarker (marker, svg, chartHeight, x, data) {
-  var radius = 12,
-      xPos = x(marker.numero) - radius - 3,
+function addMarker (marker, svg, chartHeight, x, y, data, i) {
+  var radius = 8,
+      xPos = x(marker.numero) - radius,
       yPosStart = chartHeight - radius - 3,
 //      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
-yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
-console.log(yPosEnd);
-//	alert(chartHeight);
-  var markerG = svg.append('g')
+//yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
+		yPosEnd = y((data[i].pct50))-radius;
+
+	var markerG = svg.append('g')
     .attr('class', 'marker '+marker.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
@@ -154,18 +154,18 @@ console.log(yPosEnd);
     .attr('cx', radius)
     .attr('cy', radius)
     .attr('r', radius);
-
+/* texto que corresponde al type
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*0.9);
   //  .text(marker.type);
-
+*/
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
     .text(marker.version);
 }
-function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x, data) {
+function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x, y, data) {
   rectClip.transition()
     .duration(1000*markers.length)
     .attr('width', chartWidth);
@@ -173,8 +173,8 @@ function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x, d
 //console.log(data.pct50);
   markers.forEach(function (marker, i) {
     setTimeout(function () {
-      addMarker(marker, svg, chartHeight, x, data);
-    }, 1000 + 500*i);
+      addMarker(marker, svg, chartHeight, x, y, data, i);
+    },+ 500*i);
 	  
   });
 }
@@ -209,7 +209,7 @@ function makeChart (data, markers) {
 
   addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
   drawPaths(svg, data, x, y);
-  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x, data);
+  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x, y, data);
 //	console.log(d3.max(markers, function (marker) { return marker.type; }));
 //	console.log(d3.max(data, function (d) { return d.pct95; }));
 }
