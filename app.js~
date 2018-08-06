@@ -138,13 +138,13 @@ function addMarker (marker, svg, chartHeight, x, y, data, i) {
 //      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
 //yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
 		yPosEnd = y((data[i].pct50))-radius;
+		yPosEnd_p = y((data[i].pct95))-radius;
 
 	var markerG = svg.append('g')
     .attr('class', 'marker '+marker.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
-//console.log(d.pct50);
   markerG.transition()
     .duration(1000) //Duración en aparecer los globitos
     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
@@ -164,6 +164,36 @@ function addMarker (marker, svg, chartHeight, x, y, data, i) {
     .attr('x', radius)
     .attr('y', radius*1.5)
     .text(marker.version);
+
+
+	var markerG_p = svg.append('g')
+    .attr('class', 'marker '+marker.type.toLowerCase())
+    .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
+    .attr('opacity', 0);
+
+  markerG_p.transition()
+    .duration(1000) //Duración en aparecer los globitos
+    .attr('transform', 'translate(' + xPos + ', ' + yPosEnd_p + ')')
+    .attr('opacity', 1);
+  markerG_p.append('circle')
+    .attr('class', 'marker-bg')
+    .attr('cx', radius)
+    .attr('cy', radius)
+    .attr('r', radius);
+/* texto que corresponde al type
+  markerG_p.append('text')
+    .attr('x', radius)
+    .attr('y', radius*0.9);
+  //  .text(marker.type);
+*/
+  markerG_p.append('text')
+    .attr('x', radius)
+    .attr('y', radius*1.5)
+    .text(marker.version);
+
+
+
+
 }
 function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x, y, data) {
   rectClip.transition()
