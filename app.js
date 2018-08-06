@@ -131,17 +131,17 @@ function drawPaths (svg, data, x, y) {
     .attr('clip-path', 'url(#rect-clip)');
 }
 // Funcion de globitos
-function addMarker (marker, svg, chartHeight, x, y, data, i) {
+function addMarker (d, svg, chartHeight, x, y, i) {
   var radius = 8,
-      xPos = x(marker.numero) - radius,
+      xPos = x(d.numero) - radius,
       yPosStart = chartHeight - radius - 3,
 //      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
 //yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
-		yPosEnd = y((data[i].pct50))-radius;
-		yPosEnd_p = y((data[i].pct95))-radius;
+		yPosEnd = y((d.pct50))-radius;
+		yPosEnd_p = y((d.pct95))-radius;
 
 	var markerG = svg.append('g')
-    .attr('class', 'marker '+marker.type.toLowerCase())
+    .attr('class', 'marker '+d.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
@@ -163,11 +163,10 @@ function addMarker (marker, svg, chartHeight, x, y, data, i) {
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(marker.version);
-
+    .text(d.version);
 
 	var markerG_p = svg.append('g')
-    .attr('class', 'marker '+marker.type.toLowerCase())
+    .attr('class', 'marker '+d.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
@@ -189,27 +188,24 @@ function addMarker (marker, svg, chartHeight, x, y, data, i) {
   markerG_p.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(marker.version);
-
+    .text(d.version);
 
 
 
 }
-function startTransitions (svg, chartWidth, chartHeight, rectClip, markers, x, y, data) {
+function startTransitions (svg, chartWidth, chartHeight, rectClip, x, y, data) {
   rectClip.transition()
-    .duration(1000*markers.length)
+    .duration(1000*data.length)
     .attr('width', chartWidth);
 
-//console.log(data.pct50);
-  markers.forEach(function (marker, i) {
+  data.forEach(function (d, i) {
     setTimeout(function () {
-      addMarker(marker, svg, chartHeight, x, y, data, i);
+      addMarker(d, svg, chartHeight, x, y, i);
     },+ 500*i);
-	  
   });
 }
 
-function makeChart (data, markers) {
+function makeChart (data) {
   var svgWidth  = 960,
       svgHeight = 500,
       margin = { top: 20, right: 20, bottom: 40, left: 40 },
@@ -239,7 +235,7 @@ function makeChart (data, markers) {
 
   addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
   drawPaths(svg, data, x, y);
-  startTransitions(svg, chartWidth, chartHeight, rectClip, markers, x, y, data);
+  startTransitions(svg, chartWidth, chartHeight, rectClip, x, y, data);
 //	console.log(d3.max(markers, function (marker) { return marker.type; }));
 //	console.log(d3.max(data, function (d) { return d.pct95; }));
 }
@@ -257,23 +253,12 @@ d3.json('data.json', function (error, rawData) {
       pct25: d.pct25,
       pct50: d.pct50,
       pct75: d.pct75,
-      pct95: d.pct95
+      pct95: d.pct95,
+        numero: d.numero,
+        type: d.type,
+        version: d.version
     };
-  });
-  d3.json('markers.json', function (error, markerData) {
-    if (error) {
-      console.error(error);
-      return;
-    }
-
-    var markers = markerData.map(function (marker) {
-      return {
-        numero: marker.numero,
-        type: marker.type,
-        version: marker.version
-      };
-    });
-    makeChart(data, markers);
-  });
+});
+    makeChart(data);
 });
 
