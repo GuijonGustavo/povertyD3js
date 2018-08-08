@@ -55,7 +55,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
 
   legend.append('text')
     .attr('x', 115)
-    .attr('y', 25)
+    .attr('y', 50)
     .text('Pobreza');
 //Zona IE
   legend.append('rect')
@@ -67,7 +67,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
 
   legend.append('text')
     .attr('x', 115)
-    .attr('y', 55)
+    .attr('y', 25)
     .text('IE');
 /*
   legend.append('path')
@@ -85,11 +85,11 @@ function drawPaths (svg, data, x, y) {
     .interpolate('cardinal')
     .x (function (d) { return x(d.num) || 1; })
     .y0(function (d) { return y(d.pct95); })  //Grueso del área mayor
-    .y1(function (d) { return y(d.pct25); });
+    .y1(function (d) { return y(d.pct50); });
   var upperInnerArea = d3.svg.area()
     .interpolate('cardinal')
     .x (function (d) { return x(d.num) || 1; })
-    .y0(function (d) { return y(d.pct75); })
+    .y0(function (d) { return y(d.pct50); })
     .y1(function (d) { return y(d.pct50); });
   svg.datum(data);
 
@@ -128,7 +128,7 @@ function addMarker (d, svg, chartHeight, x, y, i) {
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(d.pct75); //IE
+    .text(d.pct50); //IE
 
 	var markerG_p = svg.append('g')
     .attr('class', 'marker '+d.type.toLowerCase())
@@ -210,9 +210,7 @@ d3.json('data.json', function (error, rawData) {
   var data = rawData.map(function (d) {
     return {
       num: d.num,
-      pct25: d.pct25,
       pct50: d.pct50,
-      pct75: d.pct75,
       pct95: d.pct95,
       type: d.type,
       version: d.version
