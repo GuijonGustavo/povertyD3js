@@ -91,23 +91,6 @@ function drawPaths (svg, data, x, y) {
     .x (function (d) { return x(d.num) || 1; })
     .y0(function (d) { return y(d.pct75); })
     .y1(function (d) { return y(d.pct50); });
-  var medianLine = d3.svg.line()
-    .interpolate('cardinal')
-    .x(function (d) { return x(d.num); })
-    .y(function (d) { return y(d.pct50); });
-
-
-  var lowerInnerArea = d3.svg.area()
-    .interpolate('cardinal')
-    .x (function (d) { return x(d.num) || 1; })
-    .y0(function (d) { return y(d.pct50); })
-    .y1(function (d) { return y(d.pct25); });
-  var lowerOuterArea = d3.svg.area()
-    .interpolate('cardinal')
-    .x (function (d) { return x(d.num) || 1; })
-    .y0(function (d) { return y(d.pct25); })
-    .y1(function (d) { return y(d.pct05); });
-
   svg.datum(data);
 
   svg.append('path')
@@ -119,36 +102,22 @@ function drawPaths (svg, data, x, y) {
     .attr('class', 'area upper inner')
     .attr('d', upperInnerArea)
     .attr('clip-path', 'url(#rect-clip)');
-
-  svg.append('path')
-    .attr('class', 'area lower inner')
-    .attr('d', lowerInnerArea)
-    .attr('clip-path', 'url(#rect-clip)');
-
-  svg.append('path')
-    .attr('class', 'median-line')
-    .attr('d', medianLine)
-    .attr('clip-path', 'url(#rect-clip)');
 }
-// Funcion de globitos
+
 function addMarker (d, svg, chartHeight, x, y, i) {
   var radius = 8,
       xPos = x(i+1) - radius,
       yPosStart = chartHeight - radius - 3,
-//      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
-//yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
-		yPosEnd = y((d.pct50))-radius;
-		yPosEnd_p = y((d.pct95))-radius;
+	  yPosEnd = y((d.pct50))-radius;
+	  yPosEnd_p = y((d.pct95))-radius;
 
-	console.log("Aqui");
-	console.log(xPos);
 	var markerG = svg.append('g')
     .attr('class', 'marker '+d.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
   markerG.transition()
-    .duration(1000) //Duración en aparecer los globitos
+    .duration(1000) 
     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
     .attr('opacity', 1);
   markerG.append('circle')
@@ -156,16 +125,10 @@ function addMarker (d, svg, chartHeight, x, y, i) {
     .attr('cx', radius)
     .attr('cy', radius)
     .attr('r', radius);
-/* texto que corresponde al type
-  markerG.append('text')
-    .attr('x', radius)
-    .attr('y', radius*0.9);
-  //  .text(marker.type);
-*/
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(d.version);
+    .text(d.pct75); //IE
 
 	var markerG_p = svg.append('g')
     .attr('class', 'marker '+d.type.toLowerCase())
@@ -185,16 +148,14 @@ function addMarker (d, svg, chartHeight, x, y, i) {
   markerG_p.append('text')
     .attr('x', radius)
     .attr('y', radius*0.9);
-  //  .text(marker.type);
+    .text(marker.type);
 */
   markerG_p.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(d.version);
-
-
-
+    .text(d.pct95);  //Pobreza
 }
+
 function startTransitions (svg, chartWidth, chartHeight, rectClip, x, y, data) {
   rectClip.transition()
     .duration(1000*data.length)
@@ -215,7 +176,7 @@ function makeChart (data) {
       chartHeight = svgHeight - margin.top  - margin.bottom;
 
   var x = d3.scale.linear().range([0, chartWidth])
-            .domain(d3.extent(data, function (d) { return d.num; })),
+            .domain([1,data.length]),
       y = d3.scale.linear().range([chartHeight, 0])
             .domain([0, d3.max(data, function (d) { return d.pct95; })]);
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
@@ -228,7 +189,7 @@ function makeChart (data) {
     .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-  // clipping to start chart hidden and slide it in later
+	// clipping to start chart hidden and slide it in later
   var rectClip = svg.append('clipPath')
     .attr('id', 'rect-clip')
     .append('rect')
@@ -238,8 +199,6 @@ function makeChart (data) {
   addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
   drawPaths(svg, data, x, y);
   startTransitions(svg, chartWidth, chartHeight, rectClip, x, y, data);
-//	console.log(d3.max(markers, function (marker) { return marker.type; }));
-//	console.log(d3.max(data, function (d) { return d.pct95; }));
 }
 
 d3.json('data.json', function (error, rawData) {
@@ -251,7 +210,6 @@ d3.json('data.json', function (error, rawData) {
   var data = rawData.map(function (d) {
     return {
       num: d.num,
-      pct05: d.pct05,
       pct25: d.pct25,
       pct50: d.pct50,
       pct75: d.pct75,
@@ -262,4 +220,3 @@ d3.json('data.json', function (error, rawData) {
 });
     makeChart(data);
 });
-
