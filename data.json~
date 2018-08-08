@@ -1,6 +1,6 @@
 [
   {
-    "numMunicipios": 1,
+    "num": 1,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -10,7 +10,7 @@
     "pct95": 0.44
   },
   {
-    "numMunicipios": 2,
+    "num": 2,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -20,7 +20,7 @@
     "pct95": 0.61 
   },
   {
-    "numMunicipios": 3,
+    "num": 3,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -30,7 +30,7 @@
     "pct95": 0.61
   },
   {
-    "numMunicipios": 4,
+    "num": 4,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -40,7 +40,7 @@
     "pct95": 0.74
   },
   {
-    "numMunicipios": 5,
+    "num": 5,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -50,7 +50,7 @@
     "pct95": 0.74
   },
   {
-    "numMunicipios": 6,
+    "num": 6,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -60,7 +60,7 @@
     "pct95": 0.79
   },
   {
-    "numMunicipios": 7,
+    "num": 7,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -70,7 +70,7 @@
     "pct95": 0.95
   },
   {
-    "numMunicipios": 8,
+    "num": 8,
 	"type":"ie",
     "version": "3.0",
     "pct05": 0,
@@ -80,7 +80,7 @@
     "pct95": 0.96
   },
   {
-    "numMunicipios": 9,
+    "num": 9,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,
@@ -91,7 +91,7 @@
   },
 
   {
-    "numMunicipios": 10,
+    "num": 10,
 	"type":"ie",
     "version": "3.0",
     "pct05": 0,
@@ -101,7 +101,7 @@
     "pct95": 0.96
   },
   {
-    "numMunicipios": 11,
+    "num": 11,
 	"type":"pob",
     "version": "3.0",
     "pct05": 0,

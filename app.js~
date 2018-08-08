@@ -83,28 +83,28 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
 function drawPaths (svg, data, x, y) {
   var upperOuterArea = d3.svg.area()
     .interpolate('cardinal')
-    .x (function (d) { return x(d.numMunicipios) || 1; })
+    .x (function (d) { return x(d.num) || 1; })
     .y0(function (d) { return y(d.pct95); })  //Grueso del área mayor
     .y1(function (d) { return y(d.pct25); });
   var upperInnerArea = d3.svg.area()
     .interpolate('cardinal')
-    .x (function (d) { return x(d.numMunicipios) || 1; })
+    .x (function (d) { return x(d.num) || 1; })
     .y0(function (d) { return y(d.pct75); })
     .y1(function (d) { return y(d.pct50); });
   var medianLine = d3.svg.line()
     .interpolate('cardinal')
-    .x(function (d) { return x(d.numMunicipios); })
+    .x(function (d) { return x(d.num); })
     .y(function (d) { return y(d.pct50); });
 
 
   var lowerInnerArea = d3.svg.area()
     .interpolate('cardinal')
-    .x (function (d) { return x(d.numMunicipios) || 1; })
+    .x (function (d) { return x(d.num) || 1; })
     .y0(function (d) { return y(d.pct50); })
     .y1(function (d) { return y(d.pct25); });
   var lowerOuterArea = d3.svg.area()
     .interpolate('cardinal')
-    .x (function (d) { return x(d.numMunicipios) || 1; })
+    .x (function (d) { return x(d.num) || 1; })
     .y0(function (d) { return y(d.pct25); })
     .y1(function (d) { return y(d.pct05); });
 
@@ -215,7 +215,7 @@ function makeChart (data) {
       chartHeight = svgHeight - margin.top  - margin.bottom;
 
   var x = d3.scale.linear().range([0, chartWidth])
-            .domain(d3.extent(data, function (d) { return d.numMunicipios; })),
+            .domain(d3.extent(data, function (d) { return d.num; })),
       y = d3.scale.linear().range([chartHeight, 0])
             .domain([0, d3.max(data, function (d) { return d.pct95; })]);
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
@@ -250,7 +250,7 @@ d3.json('data.json', function (error, rawData) {
 
   var data = rawData.map(function (d) {
     return {
-      numMunicipios: d.numMunicipios,
+      num: d.num,
       pct05: d.pct05,
       pct25: d.pct25,
       pct50: d.pct50,
