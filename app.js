@@ -133,13 +133,15 @@ function drawPaths (svg, data, x, y) {
 // Funcion de globitos
 function addMarker (d, svg, chartHeight, x, y, i) {
   var radius = 8,
-      xPos = x(d.numero) - radius,
+      xPos = x(i+1) - radius,
       yPosStart = chartHeight - radius - 3,
 //      yPosEnd = (marker.type === 'ie' ? 80: 160) + radius - 3;
 //yPosEnd = (d3.min(data, function (d) { return d.pct50; }))*100;
 		yPosEnd = y((d.pct50))-radius;
 		yPosEnd_p = y((d.pct95))-radius;
 
+	console.log("Aqui");
+	console.log(xPos);
 	var markerG = svg.append('g')
     .attr('class', 'marker '+d.type.toLowerCase())
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
@@ -254,9 +256,8 @@ d3.json('data.json', function (error, rawData) {
       pct50: d.pct50,
       pct75: d.pct75,
       pct95: d.pct95,
-        numero: d.numero,
-        type: d.type,
-        version: d.version
+      type: d.type,
+      version: d.version
     };
 });
     makeChart(data);
