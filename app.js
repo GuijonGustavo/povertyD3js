@@ -56,7 +56,7 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   legend.append('text')
     .attr('x', 115)
     .attr('y', 50)
-    .text('Pobreza');
+    .text('IE');
 //Zona IE
   legend.append('rect')
     .attr('class', 'inner')
@@ -68,12 +68,11 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   legend.append('text')
     .attr('x', 115)
     .attr('y', 25)
-    .text('IE');
+    .text('Pobreza');
 /*
   legend.append('path')
     .attr('class', 'median-line')
     .attr('d', 'M10,80L85,80');
-
   legend.append('text')
     .attr('x', 115)
     .attr('y', 85)
@@ -84,13 +83,13 @@ function drawPaths (svg, data, x, y) {
   var upperOuterArea = d3.svg.area()
     .interpolate('cardinal')
     .x (function (d) { return x(d.numero) || 1; })
-    .y0(function (d) { return y(d.pct95); })  //Grueso del área mayor
-    .y1(function (d) { return y(d.pct50); });
+    .y0(function (d) { return y(d.pbza); })  //Grueso del área mayor
+    .y1(function (d) { return y(d.ieco); });
   var upperInnerArea = d3.svg.area()
     .interpolate('cardinal')
     .x (function (d) { return x(d.numero) || 1; })
-    .y0(function (d) { return y(d.pct50); })
-    .y1(function (d) { return y(d.pct50); });
+    .y0(function (d) { return y(d.ieco); })
+    .y1(function (d) { return y(d.ieco); });
   svg.datum(data);
 //console.log(data.num);
   svg.append('path')
@@ -108,11 +107,11 @@ function addMarker (d, svg, chartHeight, x, y, i) {
   var radius = 8,
       xPos = x(i+1) - radius,
       yPosStart = chartHeight - radius - 3,
-	  yPosEnd = y((d.pct50))-radius;
-	  yPosEnd_p = y((d.pct95))-radius;
+	  yPosEnd = y((d.ieco))-radius;
+	  yPosEnd_p = y((d.pbza))-radius;
 
 	var markerG = svg.append('g')
-    .attr('class', 'marker '+d.type.toLowerCase())
+    .attr('class', 'marker ')
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
@@ -128,10 +127,10 @@ function addMarker (d, svg, chartHeight, x, y, i) {
   markerG.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(d.pct50); //IE
+    .text(d.ieco); //IE
 
 	var markerG_p = svg.append('g')
-    .attr('class', 'marker '+d.type.toLowerCase())
+    .attr('class', 'marker ')
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
 
@@ -153,7 +152,7 @@ function addMarker (d, svg, chartHeight, x, y, i) {
   markerG_p.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(d.pct95);  //Pobreza
+    .text(d.pbza);  //Pobreza
 }
 
 function startTransitions (svg, chartWidth, chartHeight, rectClip, x, y, data) {
@@ -183,7 +182,7 @@ var x = d3.scale.linear().range([0, chartWidth])
 //  var x = d3.scale.linear().range([0, chartWidth])
  //           .domain([1,data.length]),
       y = d3.scale.linear().range([chartHeight, 0])
-            .domain([0, d3.max(data, function (d) { return d.pct95; })]);
+            .domain([0, d3.max(data, function (d) { return d.pbza; })]);
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
       yAxis = d3.svg.axis().scale(y).orient('left')
@@ -205,15 +204,6 @@ var x = d3.scale.linear().range([0, chartWidth])
   drawPaths(svg, data, x, y);
   startTransitions(svg, chartWidth, chartHeight, rectClip, x, y, data);
 
-//
-
-var myarray = {
-	"employees":[
-		    {"firstName":"John", "lastName":"Doe"},
-		    {"firstName":"Anna", "lastName":"Smith"},
-		    {"firstName":"Peter", "lastName":"Jones"}
-	]
-};
 }
 
 d3.json('data.json', function (error, rawData) {
@@ -259,26 +249,23 @@ var final = merge(rawData,jsonArr)
 //console.log(final.numero);
 
 
-  var data = final.map(function (t) {
+  var data = final.map(function (d) {
     return {
-//      num: t.num,
-      pct50: t.pct50,
-      pct95: t.pct95,
-      type: t.type,
-      version: t.version,
-      numero: t.numero,
+      nombre: d.nombre,
+      ieco: d.ieco,
+      pbza: d.pbza,
+      numero: d.numero
     };
 });
 
 //console.log(JSON.stringify(datos));
 
 /*
-
   var data = rawData.map(function (d) {
     return {
       num: d.num,
-      pct50: d.pct50,
-      pct95: d.pct95,
+      ieco: d.ieco,
+      pbza: d.pbza,
       type: d.type,
       version: d.version
     };

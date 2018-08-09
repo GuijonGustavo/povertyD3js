@@ -1,70 +1,59 @@
 [
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 1,
-    "pct95": 0.44
+    "nombre": "3.0",
+    "ieco": 1,
+    "pbza": 0.44
   },
   {
-	"type":"ie",
-    "version": "3.0",
-    "pct50": 0.98,
-    "pct95": 0.61 
+    "nombre": "3.0",
+    "ieco": 0.98,
+    "pbza": 0.61 
   },
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 0.83,
-    "pct95": 0.61
+    "nombre": "3.0",
+    "ieco": 0.83,
+    "pbza": 0.61
   },
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 0.95,
-    "pct95": 0.74
+    "nombre": "3.0",
+    "ieco": 0.95,
+    "pbza": 0.74
   },
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 0.84,
-    "pct95": 0.74
+    "nombre": "3.0",
+    "ieco": 0.84,
+    "pbza": 0.74
   },
   {
-	"type":"ie",
-    "version": "3.0",
-    "pct50": 0.92,
-    "pct95": 0.79
+    "nombre": "3.0",
+    "ieco": 0.92,
+    "pbza": 0.79
   },
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 0.90,
-    "pct95": 0.95
+    "nombre": "3.0",
+    "ieco": 0.90,
+    "pbza": 0.95
   },
   {
-	"type":"ie",
-    "version": "3.0",
-    "pct50": 0.52,
-    "pct95": 0.96
+    "nombre": "3.0",
+    "ieco": 0.52,
+    "pbza": 0.96
   },
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 0.80,
-    "pct95": 0.86
+    "nombre": "3.0",
+    "ieco": 0.80,
+    "pbza": 0.86
   },
 
   {
-	"type":"ie",
-    "version": "3.0",
-    "pct50": 0.99,
-    "pct95": 0.96
+    "nombre": "3.0",
+    "ieco": 0.99,
+    "pbza": 0.96
   },
   {
-	"type":"pob",
-    "version": "3.0",
-    "pct50": 0.70,
-    "pct95": 1
+    "nombre": "3.0",
+    "ieco": 0.70,
+    "pbza": 1
   }
 
 ]
