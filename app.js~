@@ -135,7 +135,7 @@ function addMarker (d, svg, chartHeight, x, y, i) {
     .attr('opacity', 0);
 
   markerG_p.transition()
-    .duration(1000) //Duración en aparecer los globitos
+    .duration(2000) //Duración en aparecer los globitos
     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd_p + ')')
     .attr('opacity', 1);
   markerG_p.append('circle')
@@ -157,13 +157,14 @@ function addMarker (d, svg, chartHeight, x, y, i) {
 
 function startTransitions (svg, chartWidth, chartHeight, rectClip, x, y, data) {
   rectClip.transition()
-    .duration(1000*data.length)
+  //  .duration(100*data.length)
+    .duration(2000)
     .attr('width', chartWidth);
 
   data.forEach(function (d, i) {
     setTimeout(function () {
       addMarker(d, svg, chartHeight, x, y, i);
-    },+ 500*i);
+    },+ 50*i);
   });
 }
 
@@ -206,7 +207,7 @@ var x = d3.scale.linear().range([0, chartWidth])
 
 }
 
-d3.json('data.json', function (error, rawData) {
+d3.json('ags.json', function (error, rawData) {
   if (error) {
     console.error(error);
     return;
