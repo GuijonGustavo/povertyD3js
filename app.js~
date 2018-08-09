@@ -83,16 +83,16 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
 function drawPaths (svg, data, x, y) {
   var upperOuterArea = d3.svg.area()
     .interpolate('cardinal')
-    .x (function (d) { return x(d.num) || 1; })
+    .x (function (d) { return x(d.numero) || 1; })
     .y0(function (d) { return y(d.pct95); })  //Grueso del área mayor
     .y1(function (d) { return y(d.pct50); });
   var upperInnerArea = d3.svg.area()
     .interpolate('cardinal')
-    .x (function (d) { return x(d.num) || 1; })
+    .x (function (d) { return x(d.numero) || 1; })
     .y0(function (d) { return y(d.pct50); })
     .y1(function (d) { return y(d.pct50); });
   svg.datum(data);
-
+//console.log(data.num);
   svg.append('path')
     .attr('class', 'area upper outer')
     .attr('d', upperOuterArea)
@@ -175,8 +175,13 @@ function makeChart (data) {
       chartWidth  = svgWidth  - margin.left - margin.right,
       chartHeight = svgHeight - margin.top  - margin.bottom;
 
-  var x = d3.scale.linear().range([0, chartWidth])
-            .domain([1,data.length]),
+var x = d3.scale.linear().range([0, chartWidth])
+            .domain(d3.extent(data, function (d) { return d.numero; })),
+
+
+
+//  var x = d3.scale.linear().range([0, chartWidth])
+ //           .domain([1,data.length]),
       y = d3.scale.linear().range([chartHeight, 0])
             .domain([0, d3.max(data, function (d) { return d.pct95; })]);
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
@@ -187,18 +192,28 @@ function makeChart (data) {
     .attr('width',  svgWidth)
     .attr('height', svgHeight)
     .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 	// clipping to start chart hidden and slide it in later
   var rectClip = svg.append('clipPath')
     .attr('id', 'rect-clip')
     .append('rect')
-      .attr('width', 0)
-      .attr('height', chartHeight);
+    .attr('width', 0)
+    .attr('height', chartHeight);
 
   addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
   drawPaths(svg, data, x, y);
   startTransitions(svg, chartWidth, chartHeight, rectClip, x, y, data);
+
+//
+
+var myarray = {
+	"employees":[
+		    {"firstName":"John", "lastName":"Doe"},
+		    {"firstName":"Anna", "lastName":"Smith"},
+		    {"firstName":"Peter", "lastName":"Jones"}
+	]
+};
 }
 
 d3.json('data.json', function (error, rawData) {
@@ -206,6 +221,58 @@ d3.json('data.json', function (error, rawData) {
     console.error(error);
     return;
   }
+
+var jsonArr = [];
+
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1
+			        
+			    })};
+/*
+var myData = jsonArr.map(function (e){
+return {
+	numero: e.numero
+};
+});
+*/
+
+var merge = function() {
+var destination = [],
+sources = [].slice.call( arguments, 0 );
+sources.forEach(function( source ) {
+var prop;
+for ( prop in source ) {
+if ( prop in destination && Array.isArray( destination[ prop ] ) ) {
+destination[ prop ] = destination[ prop ].concat( source[ prop ] );
+} else if ( prop in destination && typeof destination[ prop ] === "object" ) {
+destination[ prop ] = merge( destination[ prop ], source[ prop ] );
+} else {
+destination[ prop ] = source[ prop ];
+}
+}
+});
+return destination;
+};
+var final = merge(rawData,jsonArr)
+//console.log(JSON.stringify(final));
+//console.log(final.numero);
+
+
+  var data = final.map(function (t) {
+    return {
+      num: t.num,
+      pct50: t.pct50,
+      pct95: t.pct95,
+      type: t.type,
+      version: t.version,
+      numero: t.numero,
+    };
+});
+
+//console.log(JSON.stringify(datos));
+
+/*
 
   var data = rawData.map(function (d) {
     return {
@@ -215,6 +282,6 @@ d3.json('data.json', function (error, rawData) {
       type: d.type,
       version: d.version
     };
-});
+});*/
     makeChart(data);
 });
