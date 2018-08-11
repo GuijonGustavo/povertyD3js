@@ -191,15 +191,14 @@ var x = d3.scale.linear().range([0, chartWidth])
 
 
 
-//  var x = d3.scale.linear().range([0, chartWidth])
- //           .domain([1,data.length]),
       y = d3.scale.linear().range([chartHeight, 0])
             .domain([0, d3.max(data, function (d) { return d.pbza; })]);
   var xAxis = d3.svg.axis().scale(x).orient('bottom')
                 .innerTickSize(-chartHeight).outerTickSize(0).tickPadding(10),
       yAxis = d3.svg.axis().scale(y).orient('left')
                 .innerTickSize(-chartWidth).outerTickSize(0).tickPadding(10);
-  var svg = d3.select('body').append('svg')
+
+	var svg = d3.select('body').append('svg')
     .attr('width',  svgWidth)
     .attr('height', svgHeight)
     .append('g')
@@ -218,21 +217,18 @@ var x = d3.scale.linear().range([0, chartWidth])
 
 }
 
-
 //
 
 function distQuant(dato, legRow){
 	
 	function mouseoverLegend(_,p){	
-//		transitionIn("dist", p);
 		if (p ==0 ){	
 		updateData("ags_1.json");}
 		if (p ==1 ){	
 		updateData("ags_2.json");}
-	console.log(p);
 	}
 	function mouseoutLegend(){	
-		transitionOut("dist");
+		d3.selectAll("svg").remove();
 	}
 
 	d3.select("contentDiv").append("h3").text(dato.title);
