@@ -221,16 +221,19 @@ var x = d3.scale.linear().range([0, chartWidth])
 
 //
 
-function distQuant(dato){
+function distQuant(dato, legRow){
 	
 	function mouseoverLegend(_,p){	
-		transitionIn("dist", p);
+//		transitionIn("dist", p);
+		if (p ==0 ){	
+		updateData("ags_1.json");}
+		if (p ==1 ){	
+		updateData("ags_2.json");}
+	console.log(p);
 	}
-		
 	function mouseoutLegend(){	
 		transitionOut("dist");
 	}
-
 
 	d3.select("contentDiv").append("h3").text(dato.title);
 		
@@ -242,12 +245,7 @@ function distQuant(dato){
 		
 	legRow.append("span").text(function(d){ return d[0];})
 		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");	
-
-
 }
-
-
-
 function drawAll(dato, id){
 
 	var seg = d3.select("#"+id).selectAll("div").data(d3.range(dato.length)).enter()
@@ -271,8 +269,8 @@ drawAll(dqData, "contentDiv");
 
 
 //
-
-d3.json('ags.json', function (error, rawData) {
+function updateData(nomEstado) {
+d3.json(nomEstado, function (error, rawData) {
   if (error) {
     console.error(error);
     return;
@@ -337,4 +335,4 @@ var final = merge(rawData,jsonArr)
     };
 });*/
     makeChart(data);
-});
+})};
