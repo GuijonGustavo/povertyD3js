@@ -222,22 +222,23 @@ var x = d3.scale.linear().range([0, chartWidth])
 function distQuant(dato, legRow){
 	
 	function mouseoverLegend(_,p){	
+		d3.selectAll("svg").remove();
 		if (p ==0 ){	
 		updateData("ags_1.json");}
 		if (p ==1 ){	
 		updateData("ags_2.json");}
 	}
-	function mouseoutLegend(){	
-		d3.selectAll("svg").remove();
-	}
+//	function mouseoutLegend(){	
+//		d3.selectAll("svg").remove();
+//	}
 
 	d3.select("contentDiv").append("h3").text(dato.title);
 		
 	// draw legends.
 	var legRow = d3.select(contentDiv).append("div").attr("class","legenda")
 		.append("table").selectAll("tr").data(dato.dP).enter().append("tr").append("td");
-	legRow.append("div").style("background",function(d,i){ return colors[i];})
-		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");
+	legRow.append("div").style("background",function(d,i){ return colors[i];});
+//		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");
 		
 	legRow.append("span").text(function(d){ return d[0];})
 		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");	
