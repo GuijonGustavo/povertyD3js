@@ -134,7 +134,7 @@ svg{
 	margin-left:0;
 	max-height:280px;
 	min-width:190px;
-	overflow:auto;
+	float:left;
 }
 .menu table{
 	border-collapse:collapse;
@@ -153,6 +153,7 @@ svg{
 	padding: 0 5px;
 	margin:0
 }
+
 .menu tr:hover{
 	background:silver;
 }

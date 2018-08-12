@@ -37,21 +37,35 @@ head.appendChild(script);
   
   function menu(menu_d, legMenu){
 	
-	function mouseoverMenu(_,m){	
+	function mouseoverMenu(_,m){
+		var td = d3.selectAll("table tr").selectAll("td");
 		d3.selectAll(".legenda").remove();
 		if (m ==0 ){
-		load_js();}
+		load_js();
+		td.style("background", function(m, i, j) { if (i == 0 && j == 0) return "orange"; });
+		td.style("color", function(m, i, j) { if (i == 0 && j == 0) return "blue"; });
+		}
+
 		if (m ==1 ){
-		load_js();}
+		load_js();
+		td.style("background", function(m, i, j) { if (i == 0 && j == 1) return "orange"; });
+		td.style("color", function(m, i, j) { if (i == 0 && j == 1) return "blue"; });
+		}
 	}
 
 	// draw legends.
 	var legMenu = d3.select("#principal").append("div").attr("class","menu")
-		.append("table").selectAll("tr").data(menu_d.dP).enter().append("tr").append("td");
+		.append("table").selectAll("tr").data(menu_d.dP).enter().append("tr").append("td").attr();
 	legMenu.append("div").style("background",function(m,i){ return colores[i];});
 		
+/*
+	legMenu.append("span").append("input")
+		    .attr("unchecked", "false")
+			.attr("type", "checkbox");
+*/
 	legMenu.append("span").text(function(m){ return m[0];})
-		.on("mouseover",mouseoverMenu).on("mouseout",mouseoutLegend).style("cursor","pointer");	
+		.on("mouseover",mouseoverMenu);//.on("click",);//on("mouseout",mouseoutLegend).style("cursor","pointer");	
+
 }
 function drawMenu(menu_d, id){
 
