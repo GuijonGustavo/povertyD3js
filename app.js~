@@ -2,13 +2,14 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
   var legendWidth  = 200,
       legendHeight = 80;
 //Titulo del gráfico
-  svg.append('g')
+  var titlulo = svg.append('g')
 		.append("text")         // append text
-    .style("fill", "black")   // fill the text with the colour black
-    .attr("x", 200)           // set x position of left side of text
-  //  .attr("y", 100)           // set y position of bottom of text
+ //   .style("fill", "black")   // fill the text with the colour black
+    .attr("x", 180)           // set x position of left side of text
+    .attr('class', 'titulo')
+    .attr("y", 2)           // set y position of bottom of text
     .attr("dy", ".35em")           // set offset y position
-	.attr("style","bold")
+//	.attr("style","bold")
     .attr("text-anchor", "middle") // set anchor y justification
     .attr("transform", "translate(100,0) scale(2) rotate(0)"  )
     .text("Aguascalientes");
@@ -35,6 +36,16 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .text('IE');
+/*
+	var titulo = svg.append('g')
+    .attr('class', 'legend');
+   // .attr('transform', 'translate(' + (chartWidth - legendWidth) + ', 310)');
+
+  titlulo.append('text')
+    .attr('x', 15)
+    .attr('y', 50)
+    .text('Aguas');
+*/
 
 //Caja descriptiva
  var legend = svg.append('g')
@@ -69,14 +80,6 @@ function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
     .attr('x', 115)
     .attr('y', 25)
     .text('Pobreza');
-/*
-  legend.append('path')
-    .attr('class', 'median-line')
-    .attr('d', 'M10,80L85,80');
-  legend.append('text')
-    .attr('x', 115)
-    .attr('y', 85)
-    .text('Median');*/
 }
 
 	var colors = ["#7D74FE","#7DFF26","#F84F1B","#28D8D5","#FB95B6","#9D9931","#F12ABF","#27EA88","#549AD5","#FEA526","#7B8D8B","#BB755F","#432E16",
@@ -306,17 +309,5 @@ var final = merge(rawData,jsonArr)
       numero: d.numero
     };
 });
-
-
-/*
-  var data = rawData.map(function (d) {
-    return {
-      num: d.num,
-      ieco: d.ieco,
-      pbza: d.pbza,
-      type: d.type,
-      version: d.version
-    };
-});*/
     makeChart(data);
 })};

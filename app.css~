@@ -77,6 +77,14 @@ svg {
   font-size:8px;
 }
 
+.titulo{
+	font-size:36px;
+  text-anchor: middle;
+  fill: rgba(0, 53, 251, 0.8);
+
+}
+
+
 .legenda{
 	display:inline-block;
 	margin:10px;
@@ -98,7 +106,7 @@ svg {
 .legenda div{
 	width:20px;
 	height:20px;
-	float: left;
+	float: right;
 }
 .legenda span{
 	padding: 0 5px;
@@ -108,12 +116,13 @@ svg {
 	background:silver;
 }
 body{
-	width:1150px;
-	margin:10px auto;
+	width:1350px;
+	margin:auto;
 }
 svg{
-	display:inline;
-	float:left;
+	display:inline-block;
+	position:absolute;
+	margin-top:150px;
 }
 .distquantdiv{
 	clear:both;

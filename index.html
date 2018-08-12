@@ -42,13 +42,13 @@ head.appendChild(script);
 		d3.selectAll(".legenda").remove();
 		if (m ==0 ){
 		load_js();
-		td.style("background", function(m, i, j) { if (i == 0 && j == 0) return "orange"; });
+		td.style("background-color", function(m, i, j) { if (i == 0 && j == 0) return "orange"; });
 		td.style("color", function(m, i, j) { if (i == 0 && j == 0) return "blue"; });
 		}
 
 		if (m ==1 ){
 		load_js();
-		td.style("background", function(m, i, j) { if (i == 0 && j == 1) return "orange"; });
+		td.style("background-color", function(m, i, j) { if (i == 0 && j == 1) return "orange"; });
 		td.style("color", function(m, i, j) { if (i == 0 && j == 1) return "blue"; });
 		}
 	}
