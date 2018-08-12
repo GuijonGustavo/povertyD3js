@@ -198,7 +198,7 @@ var x = d3.scale.linear().range([0, chartWidth])
       yAxis = d3.svg.axis().scale(y).orient('left')
                 .innerTickSize(-chartWidth).outerTickSize(0).tickPadding(10);
 
-	var svg = d3.select('body').append('svg')
+	var svg = d3.select('div#contentDiv').append('svg')
     .attr('width',  svgWidth)
     .attr('height', svgHeight)
     .append('g')
@@ -216,9 +216,6 @@ var x = d3.scale.linear().range([0, chartWidth])
   startTransitions(svg, chartWidth, chartHeight, rectClip, x, y, data);
 
 }
-
-//
-
 function distQuant(dato, legRow){
 	
 	function mouseoverLegend(_,p){	
@@ -228,14 +225,9 @@ function distQuant(dato, legRow){
 		if (p ==1 ){	
 		updateData("ags_2.json");}
 	}
-//	function mouseoutLegend(){	
-//		d3.selectAll("svg").remove();
-//	}
-
-	d3.select("contentDiv").append("h3").text(dato.title);
 		
 	// draw legends.
-	var legRow = d3.select(contentDiv).append("div").attr("class","legenda")
+	var legRow = d3.select("#contentDiv").append("div").attr("class","legenda")
 		.append("table").selectAll("tr").data(dato.dP).enter().append("tr").append("td");
 	legRow.append("div").style("background",function(d,i){ return colors[i];});
 //		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");
@@ -254,11 +246,7 @@ drawAll(dqData, "contentDiv");
 
 
 
-
-
-
-
-
+////////////
 
 
 
@@ -319,7 +307,6 @@ var final = merge(rawData,jsonArr)
     };
 });
 
-//console.log(JSON.stringify(datos));
 
 /*
   var data = rawData.map(function (d) {

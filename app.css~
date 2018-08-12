@@ -77,7 +77,57 @@ svg {
   font-size:8px;
 }
 
-.legend{
+.legenda{
+	display:inline-block;
+	margin:10px;
+	margin-top:30px;
+	margin-left:0;
+	max-height:280px;
+	min-width:190px;
+	overflow:auto;
+	float:right;
+}
+.legenda table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+.legenda tr, .legend td, .legend div{
+	margin:0;
+	padding:0;
+}
+.legenda div{
+	width:20px;
+	height:20px;
+	float: left;
+}
+.legenda span{
+	padding: 0 5px;
+	margin:0
+}
+.legenda tr:hover{
+	background:silver;
+}
+body{
+	width:1150px;
+	margin:10px auto;
+}
+svg{
+	display:inline;
+	float:left;
+}
+.distquantdiv{
+	clear:both;
+	padding:10px;
+	overflow:hidden;
+	margin: 20px;
+}
+.distquantdiv h3{
+	padding-left: 40px;
+	margin-bottom:0;
+}
+
+
+.menu{
 	display:inline-block;
 	margin:10px;
 	margin-top:30px;
@@ -86,24 +136,24 @@ svg {
 	min-width:190px;
 	overflow:auto;
 }
-.legend table{
+.menu table{
 	border-collapse:collapse;
 	border-spacing:0;
 }
-.legend tr, .legend td, .legend div{
+.menu tr, .menu td, .menu div{
 	margin:0;
 	padding:0;
 }
-.legend div{
+.menu div{
 	width:20px;
 	height:20px;
 	float: left;
 }
-.legend span{
+.menu span{
 	padding: 0 5px;
 	margin:0
 }
-.legend tr:hover{
+.menu tr:hover{
 	background:silver;
 }
 
