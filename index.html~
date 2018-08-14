@@ -7,6 +7,9 @@
   </head>
 
   <body>
+
+
+<h3>Sitio de pobreza ambiental</h3>
 <div id="contentDiv">
 <div id=principal>
 </div>
@@ -27,30 +30,78 @@
 
 
 
-function load_js()
+function load_js_0()
 	   {
 var head= document.getElementsByTagName('head')[0];
 var script= document.createElement('script');
-script.src= "app.js";
+script.src= "Pza_por/Pza_por.js";
+head.appendChild(script);
+}
+ 
+function load_js_1()
+	   {
+var head= document.getElementsByTagName('head')[0];
+var script= document.createElement('script');
+script.src= "Pza_mod_por/Pza_mod_por.js";
 head.appendChild(script);
 }
   
+function load_js_2()
+	   {
+var head= document.getElementsByTagName('head')[0];
+var script= document.createElement('script');
+script.src= "Pza_ext_por/Pza_ext_por.js";
+head.appendChild(script);
+}
+  
+function load_js_3()
+	   {
+var head= document.getElementsByTagName('head')[0];
+var script= document.createElement('script');
+script.src= "Vul_CS_por/Vul_CS_por.js";
+head.appendChild(script);
+}
+  
+function load_js_4()
+	   {
+var head= document.getElementsByTagName('head')[0];
+var script= document.createElement('script');
+script.src= "Vul_ing_por/Vul_ing_por.js";
+head.appendChild(script);
+}
+   
   function menu(menu_d, legMenu){
 	
 	function mouseoverMenu(_,m){
 		var td = d3.selectAll("table tr").selectAll("td");
 		d3.selectAll(".legenda").remove();
 		if (m ==0 ){
-		load_js();
+		load_js_0();
 		td.style("background-color", function(m, i, j) { if (i == 0 && j == 0) return "orange"; });
 		td.style("color", function(m, i, j) { if (i == 0 && j == 0) return "blue"; });
 		}
 
 		if (m ==1 ){
-		load_js();
+		load_js_1();
 		td.style("background-color", function(m, i, j) { if (i == 0 && j == 1) return "orange"; });
 		td.style("color", function(m, i, j) { if (i == 0 && j == 1) return "blue"; });
 		}
+		if (m ==2 ){
+		load_js_2();
+		td.style("background-color", function(m, i, j) { if (i == 0 && j == 2) return "orange"; });
+		td.style("color", function(m, i, j) { if (i == 0 && j == 2) return "blue"; });
+		}
+		if (m ==3 ){
+		load_js_3();
+		td.style("background-color", function(m, i, j) { if (i == 0 && j == 3) return "orange"; });
+		td.style("color", function(m, i, j) { if (i == 0 && j == 3) return "blue"; });
+		}
+		if (m ==4 ){
+		load_js_4();
+		td.style("background-color", function(m, i, j) { if (i == 0 && j == 4) return "orange"; });
+		td.style("color", function(m, i, j) { if (i == 0 && j == 4) return "blue"; });
+		}
+
 	}
 
 	// draw legends.
@@ -78,21 +129,7 @@ drawMenu(dqPb, "principal");
 
 </script>
 
-<script src="data_d.js"></script>
-  </body>
-
-
-
-</html>
-  
-  
-  
-  
-  
-  
-  
-  
-
+<script src="data_d.js"></script> 
   </body>
 
 </html>

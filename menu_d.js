@@ -2,11 +2,11 @@ var dqPb=[];
 dqPb.push({title:'Pobreza Ambiental',
 mean:0.393,
 dP:[
-['Pob_1',0.1,5],
-['Pob_2',0.1,6],
-['Bk',0.1,6],
-['C',0.1,6],
-['D',0.1,6],
+['Pza_por',0.1,5],
+['Pza_mod_por',0.1,6],
+['Pza_ext_por',0.1,6],
+['Vul_CS_por',0.1,6],
+['Vul_Ing_por',0.1,6],
 ],
 distMin:1,distMax:2,
 dist:[
