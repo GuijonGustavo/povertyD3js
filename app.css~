@@ -117,6 +117,7 @@ svg {
 }
 body{
 	width:1350px;
+	height:1500px;
 	margin:auto;
 }
 svg{

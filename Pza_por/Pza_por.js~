@@ -1,18 +1,19 @@
-function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight) {
+function addAxesAndLegend (svg, xAxis, yAxis, margin, chartWidth, chartHeight, data) {
   var legendWidth  = 200,
       legendHeight = 80;
+	
 //Titulo del gráfico
   var titlulo = svg.append('g')
 		.append("text")         // append text
  //   .style("fill", "black")   // fill the text with the colour black
-    .attr("x", 180)           // set x position of left side of text
+    .attr("x", 100)           // set x position of left side of text
     .attr('class', 'titulo')
-    .attr("y", 2)           // set y position of bottom of text
-    .attr("dy", ".35em")           // set offset y position
+    .attr("y", 180)           // set y position of bottom of text
+    .attr("dy", ".25em")           // set offset y position
 //	.attr("style","bold")
     .attr("text-anchor", "middle") // set anchor y justification
     .attr("transform", "translate(100,0) scale(2) rotate(0)"  )
-//    .text("Aguascalientes");
+    .text(JSON.stringify(data[0].estado));
 
   var axes = svg.append('g')
     .attr('clip-path', 'url(#axes-clip)');
@@ -214,7 +215,7 @@ var x = d3.scale.linear().range([0, chartWidth])
     .attr('width', 0)
     .attr('height', chartHeight);
 
-  addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight);
+  addAxesAndLegend(svg, xAxis, yAxis, margin, chartWidth, chartHeight, data);
   drawPaths(svg, data, x, y);
   startTransitions(svg, chartWidth, chartHeight, rectClip, x, y, data);
 
@@ -295,10 +296,9 @@ function distQuant(dato, legRow){
 	var legRow = d3.select("#contentDiv").append("div").attr("class","legenda")
 		.append("table").selectAll("tr").data(dato.dP).enter().append("tr").append("td");
 	legRow.append("div").style("background",function(d,i){ return colors[i];});
-//		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");
 		
 	legRow.append("span").text(function(d){ return d[0];})
-		.on("mouseover",mouseoverLegend).on("mouseout",mouseoutLegend).style("cursor","pointer");	
+		.on("mouseover",mouseoverLegend);	
 }
 function drawAll(dato, id){
 
@@ -328,12 +328,33 @@ d3.json(nomEstado, function (error, rawData) {
 
 var jsonArr = [];
 
+if(nomEstado == "Pza_por/db/Ags.json"){
 for (var j = 0; j < (Object.keys(rawData)).length; j++) {
 	    jsonArr.push({
-			        "numero":j+1
+			        "numero":j+1,
+					"estado":"Aguascalientes"
 			        
 			    })};
-/*
+}
+
+if(nomEstado == "Pza_por/db/Bcn.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Baja California"
+			        
+			    })};
+}
+
+
+
+	
+	
+	
+	
+	
+	
+	/*
 var myData = jsonArr.map(function (e){
 return {
 	numero: e.numero
@@ -359,8 +380,6 @@ destination[ prop ] = source[ prop ];
 return destination;
 };
 var final = merge(rawData,jsonArr)
-//console.log(JSON.stringify(final));
-//console.log(final.numero);
 
 
   var data = final.map(function (d) {
@@ -368,7 +387,8 @@ var final = merge(rawData,jsonArr)
       nombre: d.nombre,
       ieco: d.ieco,
       pbza: d.pbza,
-      numero: d.numero
+      numero: d.numero,
+	  estado: d.estado
     };
 });
     makeChart(data);
