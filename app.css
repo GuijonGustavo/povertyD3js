@@ -121,8 +121,8 @@ body{
 }
 svg{
 	display:inline-block;
-	position:absolute;
-	margin-top:150px;
+	margin-top:50px;
+	float:left;
 }
 .distquantdiv{
 	clear:both;
@@ -166,4 +166,8 @@ svg{
 .menu tr:hover{
 	background:silver;
 }
-
+h3 {
+font-size:30px;
+font-weight:bold;
+color: rgba(0, 53, 251, 0.8);
+}

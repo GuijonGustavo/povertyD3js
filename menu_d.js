@@ -2,11 +2,11 @@ var dqPb=[];
 dqPb.push({title:'Pobreza Ambiental',
 mean:0.393,
 dP:[
-['Pza_por',0.1,5],
-['Pza_mod_por',0.1,6],
-['Pza_ext_por',0.1,6],
-['Vul_CS_por',0.1,6],
-['Vul_Ing_por',0.1,6],
+['Porcentaje de Población en Pobreza',0.1,5],
+['Porcentaje de Población en Pobreza Moderada',0.1,6],
+['Porcentaje de Población en Pobreza Extrema',0.1,6],
+['Porcentaje de Población Vulnerable por Carencias de Salud',0.1,6],
+['Porcentaje de Población Vulnerable por Ingresos',0.1,6],
 ],
 distMin:1,distMax:2,
 dist:[

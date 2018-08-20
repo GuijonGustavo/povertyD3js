@@ -130,7 +130,7 @@ function addMarker (d, svg, chartHeight, x, y, i) {
     .attr('class', 'marker ')
     .attr('transform', 'translate(' + xPos + ', ' + yPosStart + ')')
     .attr('opacity', 0);
-
+/*
   markerG.transition()
     .duration(1000) 
     .attr('transform', 'translate(' + xPos + ', ' + yPosEnd + ')')
@@ -159,16 +159,16 @@ function addMarker (d, svg, chartHeight, x, y, i) {
     .attr('cx', radius)
     .attr('cy', radius)
     .attr('r', radius);
-/* texto que corresponde al type
+ texto que corresponde al type
   markerG_p.append('text')
     .attr('x', radius)
     .attr('y', radius*0.9);
     .text(marker.type);
-*/
+
   markerG_p.append('text')
     .attr('x', radius)
     .attr('y', radius*1.5)
-    .text(d.pbza);  //Pobreza
+    .text(d.pbza);  //Pobreza*/
 }
 
 function startTransitions (svg, chartWidth, chartHeight, rectClip, x, y, data) {
@@ -332,8 +332,7 @@ if(nomEstado == "Pza_por/db/Ags.json"){
 for (var j = 0; j < (Object.keys(rawData)).length; j++) {
 	    jsonArr.push({
 			        "numero":j+1,
-					"estado":"Aguascalientes"
-			        
+					"estado":"Ags"
 			    })};
 }
 
@@ -341,10 +340,279 @@ if(nomEstado == "Pza_por/db/Bcn.json"){
 for (var j = 0; j < (Object.keys(rawData)).length; j++) {
 	    jsonArr.push({
 			        "numero":j+1,
-					"estado":"Baja California"
-			        
+					"estado":"Bcn"
 			    })};
 }
+
+if(nomEstado == "Pza_por/db/Bcs.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Bcs"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Cam.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Cam"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Chp.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Chp"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Chi.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Chi"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Dif.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Dif"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Coa.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Coa"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Col.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Col"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Dur.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Dur"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Gto.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Gto"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Gro.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Gro"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Hgo.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Hgo"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Jal.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Jal"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Mex.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Mex"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Mic.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Mic"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Mor.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Mor"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Nay.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Nay"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Nle.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Nle"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Oax.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Oax"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Pue.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Pue"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Qro.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Qro"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Roo.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Roo"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Slp.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Slp"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Sin.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Sin"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Son.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Son"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Tab.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Tab"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Tam.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Tam"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Tlx.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Tlx"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Ver.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Ver"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Yuc.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Yuc"
+			    })};
+}
+
+
+if(nomEstado == "Pza_por/db/Zac.json"){
+for (var j = 0; j < (Object.keys(rawData)).length; j++) {
+	    jsonArr.push({
+			        "numero":j+1,
+					"estado":"Zac"
+			    })};
+}
+
 
 
 
